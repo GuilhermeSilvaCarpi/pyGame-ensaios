@@ -1,33 +1,36 @@
-import pygame
+# import pygame
 from math import radians, sin, cos
+from time import time
 
-class Corpo():
+
+class Body:
     x: int
     y: int
-    mass: float
-    velocityX: float
-    velocityY: float
     accelerationX: float
     accelerationY: float
 
-    # metodos funcionais
-
-
+    # functional methods
     def deltaSpace(self):
-        # velocidade aumenta de acordo com aceleração
-        self.velocityX += self.acelerationX
-        self.velocityY += self.acelerationY
-        # posição varia de acordo dcom a velocidade
-        self.x += int(self.velocidadeX)
-        self.y += int(self.velocidadeY)
+
+        it = self.ft
+        self.ft = time()
+        dt = self.ft - it
+
+        # velocity ups with acceleration
+        self.velocityX += self.accelerationX
+        self.velocityY += self.accelerationY
+
+        # position change with velocity
+        self.x += int(self.velocityX)
+        self.y += int(self.velocityY)
 
     def addVelocity(self, intensity: float, angle: float):
-        #v = variação de posição
+        # v = position change
         self.velocityX += intensity * sin(radians(angle))
         self.velocityY += intensity * cos(radians(angle))
 
     def addAcceleration(self, intensity: float, angle: float):
-        # a = varição de velocidade
+        # a = velocity variation
         self.accelerationX += intensity * sin(radians(angle))
         self.accelerationY += intensity * cos(radians(angle))
 
@@ -38,10 +41,16 @@ class Corpo():
         self.accelerationX += intensity * sin(radians(angle))
         self.accelerationY += intensity * cos(radians(angle))
 
-    # metodos principais
+    # mains methods
     def __init__(self, mass: float):
+        self.ft = 0
         self.mass = mass
+        self.x, self.y = 0, 0
+        self.velocityX, self.velocityY = 0, 0
+        self.accelerationX, self.accelerationY = 0, 0
+
     def update(self):
         self.deltaSpace()
+
     def render(self):
         pass

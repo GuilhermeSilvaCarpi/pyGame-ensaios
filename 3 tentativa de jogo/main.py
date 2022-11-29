@@ -7,21 +7,21 @@ display = pygame.display.set_mode([1000, 500])
 pygame.display.set_caption('uma tentativa de jogo')
 clock = pygame.time.Clock()
 gameLoop = True
-
-# objetos
-player = Player()
-rect = pygame.rect.Rect(10, 10, 100, 100)
+# game variables
+buttons = [False, False, False, False]
+# objects
+player = Player(display)
 # game loop
 
 
 def update():
-    pass
+    player.update(buttons)
 
 
 def render():
     display.fill([10, 10, 10])
 
-    pygame.draw.rect(display, [100, 100, 100], rect)
+    player.render()
 
     pygame.display.update()
 
@@ -35,13 +35,21 @@ while gameLoop:
             break
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[pygame.K_w]:
-            rect.y -= 5
-        if pressed_keys[pygame.K_s]:
-            rect.y += 5
+            buttons[0] = True
+        else:
+            buttons[0] = False
         if pressed_keys[pygame.K_a]:
-            rect.x -= 5
+            buttons[1] = True
+        else:
+            buttons[1] = False
+        if pressed_keys[pygame.K_s]:
+            buttons[2] = True
+        else:
+            buttons[2] = False
         if pressed_keys[pygame.K_d]:
-            rect.x += 5
+            buttons[3] = True
+        else:
+            buttons[3] = False
     #
     update()
     render()
