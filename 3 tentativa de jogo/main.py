@@ -1,5 +1,6 @@
 import pygame
 from player import Player
+from time import time
 
 # initializing
 pygame.init()
@@ -7,6 +8,7 @@ display = pygame.display.set_mode([1000, 500])
 pygame.display.set_caption('uma tentativa de jogo')
 clock = pygame.time.Clock()
 gameLoop = True
+initialTime = time()
 # game variables
 buttons = [False, False, False, False]
 # objects
@@ -15,7 +17,7 @@ player = Player(display)
 
 
 def update():
-    player.update(buttons)
+    player.update(buttons, deltaTime)
 
 
 def render():
@@ -50,7 +52,9 @@ while gameLoop:
             buttons[3] = True
         else:
             buttons[3] = False
-    #
+    # loop
+    finalTime = time()
+    deltaTime = finalTime - initialTime
     update()
     render()
     clock.tick(120)

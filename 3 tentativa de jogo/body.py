@@ -1,6 +1,5 @@
 # import pygame
 from math import radians, sin, cos
-from time import time
 
 
 class Body:
@@ -10,19 +9,14 @@ class Body:
     accelerationY: float
 
     # functional methods
-    def deltaSpace(self):
-
-        it = self.ft
-        self.ft = time()
-        dt = self.ft - it
-
+    def deltaSpace(self, deltatime: float):
         # velocity ups with acceleration
-        self.velocityX += self.accelerationX
-        self.velocityY += self.accelerationY
+        self.velocityX += self.accelerationX / 100
+        self.velocityY += self.accelerationY / 100
 
         # position change with velocity
-        self.x += int(self.velocityX)
-        self.y += int(self.velocityY)
+        self.x += int(self.velocityX * deltatime) / 1000
+        self.y += int(self.velocityY * deltatime) / 1000
 
     def addVelocity(self, intensity: float, angle: float):
         # v = position change
@@ -49,8 +43,8 @@ class Body:
         self.velocityX, self.velocityY = 0, 0
         self.accelerationX, self.accelerationY = 0, 0
 
-    def update(self):
-        self.deltaSpace()
+    def update(self, deltatime: float):
+        self.deltaSpace(deltatime)
 
     def render(self):
         pass
