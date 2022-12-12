@@ -5,10 +5,10 @@ from time import time
 # initializing
 pygame.init()
 display = pygame.display.set_mode([1000, 500])
-pygame.display.set_caption('uma tentativa de jogo')
+pygame.display.set_caption('an attempt at a game')
 clock = pygame.time.Clock()
 gameLoop = True
-initialTime = time()
+finalTime = time()
 # game variables
 buttons = [False, False, False, False]
 # objects
@@ -17,7 +17,7 @@ player = Player(display)
 
 
 def update():
-    player.update(buttons, deltaTime)
+    player.update(deltaTime, buttons)
 
 
 def render():
@@ -32,7 +32,7 @@ while gameLoop:
     # inputs
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            print('jogo fechado')
+            print('game finished')
             gameLoop = False
             break
         pressed_keys = pygame.key.get_pressed()
@@ -53,8 +53,10 @@ while gameLoop:
         else:
             buttons[3] = False
     # loop
+    initialTime = finalTime
     finalTime = time()
     deltaTime = finalTime - initialTime
+
     update()
     render()
-    clock.tick(120)
+    clock.tick(60)

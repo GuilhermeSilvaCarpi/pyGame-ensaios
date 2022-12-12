@@ -3,28 +3,37 @@ from math import radians, sin, cos
 
 
 class Body:
-    x: int
-    y: int
+    x: float
+    y: float
+    deltaX: float
+    deltaY: float
     accelerationX: float
     accelerationY: float
 
     # functional methods
-    def deltaSpace(self, deltatime: float):
-        # velocity ups with acceleration
-        self.velocityX += self.accelerationX / 100
-        self.velocityY += self.accelerationY / 100
-
-        # position change with velocity
-        self.x += int(self.velocityX * deltatime) / 1000
-        self.y += int(self.velocityY * deltatime) / 1000
+    def deltaSpace(self, delta_time: float):
+        # velocity increases with acceleration
+        self.velocityX += self.accelerationX * delta_time
+        self.velocityY += self.accelerationY * delta_time
+        # getting initial position to calculate variance
+        iX = self.x
+        iY = self.y
+        # space variation. position increases with velocity
+        self.x += self.velocityX * delta_time
+        self.y += self.velocityY * delta_time
+        # delta space calculation
+        fX = self.x
+        fY = self.y
+        self.deltaX = fX - iX
+        self.deltaY = fY - iY
 
     def addVelocity(self, intensity: float, angle: float):
-        # v = position change
+        # velocity is position variation
         self.velocityX += intensity * sin(radians(angle))
         self.velocityY += intensity * cos(radians(angle))
 
     def addAcceleration(self, intensity: float, angle: float):
-        # a = velocity variation
+        # acceleration is velocity variation
         self.accelerationX += intensity * sin(radians(angle))
         self.accelerationY += intensity * cos(radians(angle))
 
@@ -43,8 +52,12 @@ class Body:
         self.velocityX, self.velocityY = 0, 0
         self.accelerationX, self.accelerationY = 0, 0
 
-    def update(self, deltatime: float):
-        self.deltaSpace(deltatime)
+    def update(self, delta_time: float):
+        self.deltaSpace(delta_time)
 
     def render(self):
         pass
+
+    def getDeltaSpace(self):
+        # returns the space variation in a frame
+        return [self.deltaX, self.deltaY]
