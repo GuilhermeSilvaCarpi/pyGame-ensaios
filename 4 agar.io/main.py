@@ -8,23 +8,23 @@ from ia import Ia
 pygame.init()
 pygame.display.set_caption('Agar.io')
 display = pygame.display.set_mode([600, 600])
-rectDisplay = display.get_rect()
+retanguloJanela = display.get_rect()
 isRunning = True
 clock = pygame.time.Clock
 
 # Objetos
-blobs = [Jogador(rectDisplay, [300, 300])]
+blobs = [Jogador(retanguloJanela, [300, 300])]
 for i in range(20):
-    blobs.append(Ia(rectDisplay, blobs))
+    blobs.append(Ia(retanguloJanela, blobs))
 
 frutas = []
 for i in range(140):
-    frutas.append(Fruta(rectDisplay, blobs))
+    frutas.append(Fruta(retanguloJanela, blobs))
 
 # loop
 def update():
     for obj in blobs:
-        obj.update(rectDisplay, blobs, frutas)
+        obj.update(blobs, frutas)
     for fruta in frutas:
         fruta.update()
 

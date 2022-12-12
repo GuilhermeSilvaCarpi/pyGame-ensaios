@@ -3,9 +3,9 @@ from pygame import Rect
 from math import dist
 
 class Ia(Bolha):
-    def update(self,  rect: Rect, bolhas: list, frutas: list):
+    def update(self, bolhas: list, frutas: list):
         alvo = [0, 0]
-        menorDistancia = rect.w + rect.h
+        menorDistancia = self.janela.w + self.janela.h
         for bolha in bolhas:
             if bolha != self:
                 # qual tem a menor distancia
@@ -17,5 +17,4 @@ class Ia(Bolha):
         else:
             self.apontaPara(alvo)
         self.bolhas = bolhas
-        self.rect = rect
-        super().update(rect, bolhas, frutas)
+        super().update(bolhas, frutas)

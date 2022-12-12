@@ -7,6 +7,7 @@ class Bolha:
     x: float
     y: float
     raio: float
+    janela: pygame.Rect
     velocidade = float
     angulo = [float, float]
     cor = [int, int, int]
@@ -33,19 +34,19 @@ class Bolha:
         # self.x += sin(radians(self.angulo)) * self.velocidade
         # self.y += cos(radians(self.angulo)) * self.velocidade
 
-    def absorção(self, bolhas: list, rect: pygame.Rect):
+    def absorção(self, bolhas: list):
         for bolha in bolhas:
             # se está comivel
             if dist([self.x, self.y], [bolha.x, bolha.y]) < self.raio:
                 # se for maior
                 if bolha.raio < self.raio:
                     self.raio += bolha.raio * 0.2
-                    bolha.altodestruição(bolhas, rect)
+                    bolha.altodestruição(bolhas)
 
-    def altodestruição(self, bolhas: list, rect: pygame.Rect):
+    def altodestruição(self, bolhas: list):
         bolhas.remove(self)
         del self
-        # self.__init__(rect, bolhas)
+        # self.__init__(rect, self.janela)
 
     def comerFruta(self, frutas: list):
         frutose = 2
@@ -56,33 +57,34 @@ class Bolha:
                 fruta.altodestruição()
 
     # main
-    def __init__(self, rect: pygame.Rect, bolhas: list):
-        # posicap
-        self.x = randint(0, rect.w)
-        self.y = randint(0, rect.h)
+    def __init__(self, janela: pygame.Rect, bolhas: list):
+        # posição
+        self.x = randint(0, janela.w)
+        self.y = randint(0, janela.h)
 
         # iniciando atributos
         self.raio = 5
         self.velocidade = 2
         self.mudarAngulo(0)
         self.cor = [100, 200, 100]
+        self.janela = janela
 
         self.raio += randint(0, 3)
 
     # loop
-    def update(self,  rect: pygame.Rect, bolhas: list, frutas: list):
-        self.absorção(bolhas, rect)
+    def update(self, bolhas: list, frutas: list):
+        self.absorção(bolhas)
         self.movimento()
         self.comerFruta(frutas)
         # limitação conforme arena
         if self.x - self.raio < 0:
             self.x = self.raio
-        elif self.x + self.raio > rect.w:
-            self.x = rect.w - self.raio
+        elif self.x + self.raio > self.janela.w:
+            self.x = self.janela.w - self.raio
         if self.y - self.raio < 0:
             self.y = self.raio
-        elif self.y + self.raio > rect.h:
-            self.y = rect.h - self.raio
+        elif self.y + self.raio > self.janela.h:
+            self.y = self.janela.h - self.raio
 
     def render(self, display):
         pygame.draw.circle(display, self.cor, [self.x, self.y], self.raio)

@@ -3,15 +3,13 @@ from bolha import Bolha
 
 
 class Fruta(Bolha):
-    rect = None
     bolhas: list
 
-    def __init__(self, rect: Rect, bolhas: list):
-        super().__init__(rect, bolhas)
+    def __init__(self, janela: Rect, bolhas: list):
+        super().__init__(janela, bolhas)
         self.angulo = [0, 0]
         self.cor = [200, 200, 0]
         self.raio = 2
-        self.rect = rect
         self.bolhas = bolhas
 
     def update(self):
@@ -21,4 +19,4 @@ class Fruta(Bolha):
         super().render(display)
 
     def altodestruição(self):
-        self.__init__(self.rect, self.bolhas)
+        self.__init__(self.janela, self.bolhas)

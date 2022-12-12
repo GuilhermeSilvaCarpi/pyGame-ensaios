@@ -3,9 +3,9 @@ from bolha import Bolha
 
 class Jogador(Bolha):
     # main
-    def __init__(self, rect: pygame.Rect, pos: [float, float]):
+    def __init__(self, janela: pygame.Rect, pos: [float, float]):
         bolhas = [self]
-        super().__init__(rect, bolhas)
+        super().__init__(janela, bolhas)
         self.x = pos[0]
         self.y = pos[1]
 
@@ -13,10 +13,10 @@ class Jogador(Bolha):
         self.cor = [100, 100, 200]
 
     # loop
-    def update(self,  rect: pygame.Rect, bolhas: list, frutas: list):
+    def update(self, bolhas: list, frutas: list):
         self.mousePos = pygame.mouse.get_pos()
         self.apontaPara(self.mousePos)
-        super().update(rect, bolhas, frutas)
+        super().update(bolhas, frutas)
 
 
     def render(self, display):
