@@ -14,11 +14,11 @@ clock = pygame.time.Clock
 
 # Objetos
 blobs = [Jogador(retanguloJanela, [300, 300])]
-for i in range(20):
+for i in range(1): #20
     blobs.append(Ia(retanguloJanela, blobs))
 
 frutas = []
-for i in range(140):
+for i in range(800): #300
     frutas.append(Fruta(retanguloJanela, blobs))
 
 # loop

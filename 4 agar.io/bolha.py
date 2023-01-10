@@ -49,7 +49,7 @@ class Bolha:
         # self.__init__(rect, self.janela)
 
     def comerFruta(self, frutas: list):
-        frutose = 2
+        frutose = 1.5
 
         for fruta in frutas:
             if dist([self.x, self.y], [fruta.x, fruta.y]) < self.raio:
@@ -76,6 +76,11 @@ class Bolha:
         self.absorção(bolhas)
         self.movimento()
         self.comerFruta(frutas)
+        # limitação tamanho
+        if self.raio > self.janela.w / 2:
+            self.raio = self.janela.w / 2
+        if self.raio > self.janela.h / 2:
+            self.raio = self.janela / 2
         # limitação conforme arena
         if self.x - self.raio < 0:
             self.x = self.raio
