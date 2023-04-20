@@ -10,13 +10,13 @@ pygame.display.set_caption('meu game')
 running = True
 clock = pygame.time.Clock()
 # music
-# pygame.mixer.music.load('data/music/song18.mp3')
-# pygame.mixer.music.play(-1)
+pygame.mixer.music.load('data/music/song18.mp3')
+pygame.mixer.music.play(-1)
 
 # sounds
-'''laser = [pygame.mixer.Sound('data/sounds/laser1.mp3'),
+laser = [pygame.mixer.Sound('data/sounds/laser1.mp3'),
          pygame.mixer.Sound('data/sounds/laser5.mp3'),
-         pygame.mixer.Sound('data/sounds/laser9.mp3')]'''
+         pygame.mixer.Sound('data/sounds/laser9.mp3')]
 
 # objects
 objGroup = pygame.sprite.Group()
@@ -24,20 +24,14 @@ objGroup = pygame.sprite.Group()
 player = Blob(objGroup)
 bixin = Bixin(objGroup)
 
-x = 0
-y = 0
-v = 10
-
 
 # game loop
-
-
 def render():
     display.fill([50, 50, 50])
     objGroup.draw(display)
 
     pygame.draw.rect(display, [200, 200, 200, 255],
-                     pygame.Rect(x, y, 50, 50))
+                     pygame.Rect(10, 10, 50, 50))
 
     pygame.display.update()
 
@@ -54,22 +48,20 @@ while running:
             break
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
-                pass
-                # laser[0].play()
+                laser[0].play()
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_q:
-                pass
-                # laser[2].play()
+                laser[2].play()
         # pressed keys
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[pygame.K_w]:
-            y -= v
+            pass
         if pressed_keys[pygame.K_s]:
-            y += v
+            pass
         if pressed_keys[pygame.K_a]:
-            x -= v
+            pass
         if pressed_keys[pygame.K_d]:
-            x += v
+            pass
 
     render()
     update()

@@ -23,7 +23,7 @@ class Blob(pygame.sprite.Sprite):
         if keys_presseds[pygame.K_d]:
             self.rect.x += v
 
-        #limites tela
+        # limites tela
         if self.rect.top < 0:
             self.rect.top = 0
         if self.rect.left < 0:

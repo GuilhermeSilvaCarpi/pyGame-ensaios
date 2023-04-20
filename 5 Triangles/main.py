@@ -14,13 +14,6 @@ gameLoop = True
 tri = Triangle([[100, 100], [400, 200], [300, 500]])
 tri.color = [100, 200, 200]
 
-miniTris = []
-for point in tri.points:
-    miniTris.append(Triangle([tri.pos, point, [tri.pos[0], point[1]]]))
-
-for miniTri in miniTris:
-    miniTri.color = [0, 100, 200]
-
 point = [300, 200]
 up: False
 left: False
@@ -45,8 +38,6 @@ def update():
 def render():
     display.fill((50, 50, 50))  # Background
 
-    for miniTri in miniTris:
-        miniTri.render(display)
     tri.render(display)
     if tri.pointInside(point):
         pygame.draw.circle(display, [100, 200, 100], point, 20, 2)
