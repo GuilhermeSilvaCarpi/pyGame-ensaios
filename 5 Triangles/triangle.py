@@ -1,5 +1,5 @@
 import pygame
-from math import dist, sqrt
+from math import dist
 
 
 class Triangle:
@@ -72,12 +72,16 @@ class Triangle:
 
         # Area. Using Heron´s formula
         # S = √(p*(p-a)*(p-b)*(p-c))
-        self.area = 1
+        self.area = 1.0
         p = perimeter / 2  # Semi perimeter
 
         for line in self.lines:
             self.area *= (p - line)
-        self.area = sqrt(p * self.area)
+        self.area = (p * self.area) ** 0.5
+
+        # if area is a "complex" data, convert to float
+        if type(self.area) == complex:
+            self.area = self.area.real
 
     # Loop
     def update(self):
@@ -92,5 +96,5 @@ class Triangle:
         pygame.draw.polygon(display, self.color, self.points, 2)  # Triangle
         pygame.draw.circle(display, [220, 220, 220], self.pos, 2)  # Medium point
 
-        '''for point in self.points:
-            pygame.draw.circle(display, [200, 200, 200], point, 10, 2)'''
+        for point in self.points:
+            pygame.draw.circle(display, [200, 200, 200], point, 10, 2)

@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 gameLoop = True
 
 # Initializing objects
-tri = Triangle([[100, 100], [400, 200], [300, 500]])
+tri = Triangle([[100, 100], [400, 200], [300, 400]])
 tri.color = [100, 200, 200]
 
 point = [300, 200]
@@ -74,6 +74,6 @@ while gameLoop:
         else:
             down = False
     # Loop methods
-    clock.tick(60)
+    clock.tick(200)
     update()
     render()

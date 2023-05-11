@@ -22,7 +22,9 @@ laser = [pygame.mixer.Sound('data/sounds/laser1.mp3'),
 objGroup = pygame.sprite.Group()
 
 player = Blob(objGroup)
-bixin = Bixin(objGroup)
+bixins = [Bixin(objGroup), Bixin(objGroup)]
+bixins[0].rect.y += 120
+bixins[0].rect.x += 200
 
 
 # game loop
