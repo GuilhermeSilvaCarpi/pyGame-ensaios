@@ -26,6 +26,7 @@ class Player(Body):
         # self.addForce(1, 90)
 
         self.x = 200
+        self.addVelocity(10, 360)
 
     def update(self, delta_time: float, buttons: list):
         # inputs
@@ -48,3 +49,10 @@ class Player(Body):
         self.write('DeltaSpace:   {}'.format(self.getDeltaSpace()), [2, 20])
         self.write('velocity:     [{:.2f}, {:.2f}]'.format(self.velocityX, self.velocityY), [2, 40])
         self.write('acceleration: [{:.2f}, {:.2f}]'.format(self.accelerationX, self.accelerationY), [2, 60])
+
+        pygame.draw.line(self.display, [200, 0, 200],
+                         [self.x, self.y], [self.x + self.velocityX, self.y + self.velocityY], 3)
+        pygame.draw.line(self.display, [200, 0, 0],
+                         [self.x, self.y], [self.x + self.velocityX, self.y], 3)
+        pygame.draw.line(self.display, [0, 0, 200],
+                         [self.x, self.y], [self.x, self.y + self.velocityY], 3)

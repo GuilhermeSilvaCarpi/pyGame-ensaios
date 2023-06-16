@@ -1,6 +1,8 @@
 # import pygame
 from math import radians, sin, cos
 
+import pygame.draw
+
 
 class Body:
     x: float
@@ -24,8 +26,8 @@ class Body:
         # delta space calculation
         fX = self.x
         fY = self.y
-        self.deltaX = fX - iX
-        self.deltaY = fY - iY
+        self.deltaX = (fX - iX) / delta_time
+        self.deltaY = (fY - iY) / delta_time
 
     def addVelocity(self, intensity: float, angle: float):
         # velocity is position variation
