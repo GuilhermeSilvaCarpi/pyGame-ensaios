@@ -5,10 +5,11 @@ from body import Body
 class Player(Body):
     # variables
     speed: int
+    rect: pygame.Rect
 
     # functional methods
     def write(self, subscription: str, pos: list):
-        font = pygame.font.Font(pygame.font.get_default_font(), 15)
+        font = pygame.font.Font('regular.otf', 15)
         text = font.render(subscription, True, [200, 200, 200], None)
         textRect = text.get_rect()
         textRect.x = pos[0]
@@ -17,7 +18,7 @@ class Player(Body):
 
     # initializing method
     def __init__(self, display):
-        super().__init__(1)
+        super().__init__(1, display)
         self.display = display
         self.speed = 1
 
@@ -25,8 +26,11 @@ class Player(Body):
         # self.addAcceleration(1, 90)
         # self.addForce(1, 90)
 
-        self.x = 200
-        self.addVelocity(10, 360)
+        self.pos[0] = 400
+        self.pos[1] = 200
+        # self.addAcceleration(10, 360)
+        self.addVelocityTo(10, [0, 0])
+        self.rect = pygame.Rect(0, 0, 100, 100)
 
     def update(self, delta_time: float, buttons: list):
         # inputs
@@ -38,21 +42,18 @@ class Player(Body):
             self.addVelocity(self.speed, 0)
         if buttons[3]:
             self.addVelocity(self.speed, 90)
+        #
+        self.rect.center = [self.pos[0], self.pos[1]]
+
         # super method
         super().update(delta_time)
 
     def render(self):
-        rect = pygame.rect.Rect(self.x, self.y, 100, 100)
-        pygame.draw.rect(self.display, [200, 200, 200], rect)
+        pygame.draw.rect(self.display, [200, 200, 200], self.rect)
 
-        self.write('position:     [{:.2f}, {:.2f}]'.format(self.x, self.y), [2, 2])
-        self.write('DeltaSpace:   {}'.format(self.getDeltaSpace()), [2, 20])
-        self.write('velocity:     [{:.2f}, {:.2f}]'.format(self.velocityX, self.velocityY), [2, 40])
-        self.write('acceleration: [{:.2f}, {:.2f}]'.format(self.accelerationX, self.accelerationY), [2, 60])
+        self.write('position:     [{:.2f}, {:.2f}]'.format(self.pos[0], self.pos[1]), [2, 2])
+        self.write('DeltaSpace:   [{:.2f}, {:.2f}]'.format(self.getDeltaSpace()[0], self.getDeltaSpace()[1]), [2, 20])
+        self.write('velocity:     [{:.2f}, {:.2f}]'.format(self.velocity[0], self.velocity[1]), [2, 40])
+        self.write('acceleration: [{:.2f}, {:.2f}]'.format(self.acceleration[0], self.acceleration[1]), [2, 60])
 
-        pygame.draw.line(self.display, [200, 0, 200],
-                         [self.x, self.y], [self.x + self.velocityX, self.y + self.velocityY], 3)
-        pygame.draw.line(self.display, [200, 0, 0],
-                         [self.x, self.y], [self.x + self.velocityX, self.y], 3)
-        pygame.draw.line(self.display, [0, 0, 200],
-                         [self.x, self.y], [self.x, self.y + self.velocityY], 3)
+        super().render()

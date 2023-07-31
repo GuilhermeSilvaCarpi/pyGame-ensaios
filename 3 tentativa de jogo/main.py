@@ -1,5 +1,6 @@
 import pygame
 from player import Player
+from stalker import Stalker
 from time import time
 
 # initializing
@@ -13,17 +14,22 @@ finalTime = time()
 buttons = [False, False, False, False]
 # objects
 player = Player(display)
+stalker = Stalker(display)
+stalker.target = player
 # game loop
 
 
 def update():
     player.update(deltaTime, buttons)
+    stalker.update(deltaTime)
+
 
 
 def render():
     display.fill([10, 10, 10])
 
     player.render()
+    stalker.render()
 
     pygame.display.update()
 

@@ -1,7 +1,7 @@
 import pygame
 from triangle import Triangle
-"""from math import sin, radians, degrees, dist
-from mpmath import csc"""
+# from math import sin, radians, degrees, dist
+
 
 # Initializing pygame
 pygame.init()
@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 gameLoop = True
 
 # Initializing objects
-tri = Triangle([[100, 100], [400, 200], [300, 400]])
+tri = Triangle([[100, 100], [400, 200], [300, 400], [120, 300]])
 tri.color = [100, 200, 200]
 
 point = [300, 200]

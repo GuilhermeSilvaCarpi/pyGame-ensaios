@@ -36,31 +36,31 @@ class Triangle:
     # Initializing
     def __init__(self, points: list):
         # Points
-        self.points = points
+        self.points = points[0: 3]
 
         # Cor
         self.color = [200, 200, 200]
 
         # MediumPoint
         mediumPoint = [0, 0]
-        for point in points:
+        for point in self.points:
             mediumPoint[0] += point[0]
             mediumPoint[1] += point[1]
         else:
-            mediumPoint[0] /= len(points)
-            mediumPoint[1] /= len(points)
+            mediumPoint[0] /= len(self.points)
+            mediumPoint[1] /= len(self.points)
         self.pos = mediumPoint
 
         # Relative points
         self.relativePoints = []
-        for index in range(len(points)):
+        for index in range(len(self.points)):
             self.relativePoints.append([self.points[index][0] - self.pos[0],
                                         self.points[index][1] - self.pos[1]])
 
         # Lines
         self.lines = []
-        for index in range(len(points)):
-            self.lines.append(dist(points[index - 1], points[index]))
+        for index in range(len(self.points)):
+            self.lines.append(dist(self.points[index - 1], self.points[index]))
         else:
             self.lines.append(self.lines[0])
             self.lines.pop(0)
