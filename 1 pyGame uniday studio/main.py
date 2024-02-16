@@ -1,6 +1,6 @@
 import pygame
 from blob import Blob
-from bixin_b import Bixin
+from bixin import Bixin
 
 # initializing game
 pygame.init()
